@@ -154,4 +154,51 @@ const addUser = async () => {
     }
     return employeesArr;
   };
+
+  const addIntern = async () => {
+    const { name, id, email, school, addAnother } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the intern's name? (Required)",
+        validate: validateName,
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the intern's ID? (Required)",
+        validate: validateId,
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the intern's email? (Required)",
+        validate: validateEmail,
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What's your intern's school?",
+        validate: (schoolInput_1) => {
+          if (schoolInput_1) {
+            return true;
+          } else {
+            console.log("Please enter the intern's school!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "confirm",
+        name: "addAnother",
+        message: "Do you want to add another employee?",
+        default: "true",
+      },
+    ]);
+    employeesArr.push(new Intern(name, id, email, school));
+    if (addAnother) {
+      return addUser();
+    }
+    return employeesArr;
+  };
   
