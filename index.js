@@ -107,3 +107,51 @@ const addUser = async () => {
       return false;
     }
   }
+
+  const addEngineer = async () => {
+    const { name, id, email, github, addAnother } = await inquirer.prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the engineer's name? (Required)",
+        validate: validateName,
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the engineer's ID? (Required)",
+        validate: validateId,
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the engineer's email? (Required)",
+        validate: validateEmail,
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What's your engineer's GitHub username?",
+        validate: (githubInput_1) => {
+          if (githubInput_1) {
+            return true;
+          } else {
+            console.log("Please enter the engineer's GitHub username!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "confirm",
+        name: "addAnother",
+        message: "Do you want to add another employee?",
+        default: "true",
+      },
+    ]);
+    employeesArr.push(new Engineer(name, id, email, github));
+    if (addAnother) {
+      return addUser();
+    }
+    return employeesArr;
+  };
+  
