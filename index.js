@@ -1,5 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const { type } = require("os");
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -34,11 +35,37 @@ const addManager = async () => {
             validate: validateHeaderName,
         },
         
-        {type: "input",
-        name: "id",
-        message: "What is the manager's ID? (Required)",
-        validate: validateId,
+        {
+            type: "input",
+            name: "id",
+            message: "What is the manager's ID? (Required)",
+            validate: validateId,
 
         },
-    ])
-}
+
+        {
+            type: "input",
+            name: "email",
+            message: "What is the manager's email? (Required)",
+            validate: validateEmail, 
+
+        },
+        
+        {
+            type: "input",
+            name: "office",
+            message: "What is the manager's office? (Required)",
+            validate: (officeInput) => {
+                if (officeInput) {
+                    return true;
+                } else {
+                    console.log("Please enter office.");
+                    return false;
+                }
+            },
+        },
+    ]);
+    const manager = new Manager(name, id, email, office);
+    employeesArr.push(manager);
+    return addUser();
+};
