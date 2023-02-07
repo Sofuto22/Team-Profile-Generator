@@ -201,4 +201,34 @@ const addUser = async () => {
     }
     return employeesArr;
   };
+   
+  const writeToFile = (data) => {
+     console.log(data);
+    return new Promise((resolve, reject) => {
+      fs.writeFile("./dist/index.html", data, (err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve({
+          ok: true,
+          message: "HTML page created!",
+        });
+      });
+    });
+  };
   
+  function init() {
+    mainMenu()
+      .then((response) => {
+         console.log(response);
+         console.log(employeesArr);
+        return generate.generatePage(response);
+      })
+      .then((res) => {
+        writeToFile(res);
+        console.log("Success! Check out your generated HTML page!");
+      });
+  }
+  
+  init();
