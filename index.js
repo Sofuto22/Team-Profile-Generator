@@ -69,3 +69,41 @@ const addManager = async () => {
     employeesArr.push(manager);
     return addUser();
 };
+
+const addUser = async () => {
+    const choices = await inquirer.prompt({
+      type: "list",
+      name: "role",
+      message: "Which employee are you adding? (Required)",
+      choices: ["Engineer", "Intern"],
+    });
+    switch (choices.role) {
+      default:
+      case "Engineer":
+        return addEngineer();
+      case "Intern":
+        return addIntern();
+    }
+  };
+  
+  function validateName(name) {
+    if (name) {
+      return true;
+    } else {
+      console.log("\n Please enter name!");
+      return false;
+    }
+  }
+  
+  function validateId(id) {
+    if (id) {
+      if (employeesArr.map(({ id }) => id).includes(id)) {
+        console.log("\n That ID already exists!");
+        return false;
+      }
+      return true;
+    } else {
+      console.log("\n Please enter an ID!");
+      return false;
+    }
+  }
