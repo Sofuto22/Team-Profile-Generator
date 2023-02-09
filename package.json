@@ -7,7 +7,6 @@
     "test": "jest",
     "start": "node index.js"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sofuto22/Team-Profile-Generator"
@@ -15,14 +14,13 @@
   "author": "",
   "license": "",
   "bugs": {
-    "url":"https://github.com/Sofuto22/Team-Profile-Generator/issues"
+    "url": "https://github.com/Sofuto22/Team-Profile-Generator/issues"
   },
   "homepage": "https://github.com/Sofuto22/Team-Profile-Generator#readme",
-
   "dependencies": {
     "inquirer": "^8.2.4"
   },
   "devDependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.4.2"
   }
 }
